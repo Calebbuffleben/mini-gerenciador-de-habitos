@@ -68,11 +68,3 @@ Temos uma sugestão de design no Figma. Mas sinta-se livre para utilizar a criat
 - `React`
 - `HTML, CSS, JavaScript`
 
-## ❓ FAQ
-### Posso utilizar outros frameworks ou outras versões do Next?
-Esse projeto foi pensado para praticar a versão 13 do NextJS, utilizando React 18 com Server Components. Por isso, a resolução oficial será feita dessa forma.
-
-Sinta-se livre para fazer de outras maneiras, caso você esteja estudando outros conteúdos. Mas considere que a solução oficial poderá não cobrir isso. 
-
-### Posso usar features experimentais do Next?
-Sim. Algumas features ainda estão em alpha e portanto não são recomendadas para uso em produção. Como esse se trata de um projeto para aprendizado, você pode aproveitar para experimentar essas features.
