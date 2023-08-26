@@ -1,8 +1,10 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Dosis } from 'next/font/google'
+import { Dosis, Inter } from 'next/font/google'
+import Image from 'next/image';
 
-const dosis = Dosis({ subsets: ['latin'] })
+const dosis = Dosis({ subsets: ['latin'], variable: "--font-dosis" })
+const inter = Inter({ subsets: ['latin'], variable: "--font-inter" })
 
 export const metadata: Metadata = {
   title: 'Meta diária - Gerenciador de hábitos',
@@ -16,7 +18,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={dosis.className}>{children}</body>
+      <body className={`${dosis.variable} ${inter.variable} flex items-center flex-col mt-10 bg-neutral-900`}>
+        <Image src="/images/logo.svg" width={200} height={200} />
+        {children}
+      </body>
     </html>
   )
 }
