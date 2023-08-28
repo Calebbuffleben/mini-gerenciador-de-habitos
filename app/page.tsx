@@ -1,8 +1,41 @@
 
 export default function Home() {
+  const habits = {
+    'correr': {
+      '2023-08-24': true,
+      '2023-08-25': false,
+      '2023-08-26': false,
+    },
+    'estudar programação': {
+      '2023-08-24': true,
+      '2023-08-25': false,
+      '2023-08-26': false,
+    },
+    'estudar inglês': {
+      '2023-08-24': true,
+      '2023-08-25': false,
+      '2023-08-26': false,
+    },
+    'acordar cedo': {
+      '2023-08-24': true,
+      '2023-08-25': false,
+      '2023-08-26': false,
+    }
+  }
+
   return (
-    <main>
-      
+    <main className="container relative flex flex-col gap-8 px-4 pt-16">
+      {habits === null || Object.keys(habits).length === 0 ? (
+        <h1 className="mt-20 text-4xl font-light text-white font-display text-center">
+          Vocä não tem hábitos cadastrados
+        </h1>
+      ) : (
+        habits !== null && Object.entries(habits).map(([habit, habitStreak]) => (
+          <p key={habit} className="text-white">
+            {habit} - {JSON.stringify(habitStreak)}
+          </p>
+        ))
+      )}
     </main>
-  )
+  );
 }
