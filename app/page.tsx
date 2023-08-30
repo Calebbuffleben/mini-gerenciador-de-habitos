@@ -16,11 +16,6 @@ export default function Home() {
       '2023-08-25': false,
       '2023-08-26': false,
     },
-    'acordar cedo': {
-      '2023-08-24': true,
-      '2023-08-25': false,
-      '2023-08-26': false,
-    }
   }
 
   return (
