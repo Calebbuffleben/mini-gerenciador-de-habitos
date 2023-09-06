@@ -26,9 +26,12 @@ export default function Home() {
         </h1>
       ) : (
         habits !== null && Object.entries(habits).map(([habit, habitStreak]) => (
-          <p key={habit} className="text-white">
-            {habit} - {JSON.stringify(habitStreak)}
-          </p>
+          <div key={habit} className="text-white">
+            <div className="flex justify-between items-center">
+              <span className="text-xl font-light text-white">{habit}</span>
+              <button>Delete</button>
+            </div>
+          </div>
         ))
       )}
     </main>
