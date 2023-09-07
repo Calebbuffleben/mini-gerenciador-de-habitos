@@ -1,3 +1,5 @@
+import React from "react";
+import Image from "@/node_modules/next/image";
 
 export default function Home() {
   const habits = {
@@ -29,7 +31,14 @@ export default function Home() {
           <div key={habit} className="text-white">
             <div className="flex justify-between items-center">
               <span className="text-xl font-light text-white font-sans">{habit}</span>
-              <button>Delete</button>
+              <button>
+                <Image 
+                 src="/images/trash.svg" 
+                 width={20} 
+                 height={20} 
+                 alt="Lixeira vermelha" 
+                />
+              </button>
             </div>
           </div>
         ))
