@@ -1,4 +1,5 @@
 import React from "react";
+import DayState from './components/DayState'
 import Image from "@/node_modules/next/image";
 
 export default function Home() {
@@ -45,6 +46,7 @@ export default function Home() {
               {days.map(day => (
                 <div key={day} className="flex flex-col">
                   <span className="font-sans text-xs text-white" >{day}</span>
+                  <DayState />
                 </div>
               ))}
             </section>
