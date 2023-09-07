@@ -2,6 +2,7 @@ import React from "react";
 import Image from "@/node_modules/next/image";
 
 export default function Home() {
+  const days = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
   const habits = {
     'correr': {
       '2023-08-24': true,
@@ -40,6 +41,13 @@ export default function Home() {
                 />
               </button>
             </div>
+            <section className="grid grid-cols-7 bg-neutral-800 rounded-md p-2">
+              {days.map(day => (
+                <div key={day} className="flex flex-col">
+                  <span className="font-sans text-xs text-white" >{day}</span>
+                </div>
+              ))}
+            </section>
           </div>
         ))
       )}
