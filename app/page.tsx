@@ -3,7 +3,6 @@ import DayState from './components/DayState'
 import Image from "@/node_modules/next/image";
 
 export default function Home() {
-  const days = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
   const habits = {
     'correr': {
       '2023-08-24': true,
@@ -22,6 +21,12 @@ export default function Home() {
     },
   }
 
+  const today = new Date();
+  const todayWeekDay = today.getDay();
+  const weekDays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
+
+  const sortedWeekDays = weekDays.slice(todayWeekDay + 1).concat(weekDays.slice(0, todayWeekDay + 1))
+
   return (
     <main className="container relative flex flex-col gap-8 px-4 pt-16">
       {habits === null || Object.keys(habits).length === 0 ? (
@@ -30,7 +35,7 @@ export default function Home() {
         </h1>
       ) : (
         habits !== null && Object.entries(habits).map(([habit, habitStreak]) => (
-          <div key={habit} className="text-white">
+          <div key={habit} className="text-white flex flex-col gap-2">
             <div className="flex justify-between items-center">
               <span className="text-xl font-light text-white font-sans">{habit}</span>
               <button>
@@ -43,10 +48,10 @@ export default function Home() {
               </button>
             </div>
             <section className="grid grid-cols-7 bg-neutral-800 rounded-md p-2">
-              {days.map(day => (
+              {sortedWeekDays.map(day => (
                 <div key={day} className="flex flex-col">
-                  <span className="font-sans text-xs text-white" >{day}</span>
-                  <DayState />
+                  <span className="font-sans text-xs text-white text-center" >{day}</span>
+                  <DayState day={undefined} />
                 </div>
               ))}
             </section>
