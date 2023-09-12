@@ -17,8 +17,8 @@ const NewHabit = () => {
         
         await db.collection("habits").insertOne(newHabit);
 
-        revalidatePath("/")
-        redirect("/")
+        revalidatePath("/");
+        redirect("/");
     }
     return ( 
         <main className="container relative flex flex-col gap-8 px-12 pt-16">
