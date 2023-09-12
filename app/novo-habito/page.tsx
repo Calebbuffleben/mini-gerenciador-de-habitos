@@ -1,9 +1,24 @@
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { connectToDatabase } from "../../utils/mongodb"
+
 const NewHabit = () => {
     async function newHabit (formData: FormData) {
         "use server"
         const habit = formData.get("habit");
 
-        console.log(habit)
+        const { db } = await connectToDatabase();
+
+        const newHabit = {
+            [habit as string] : {
+
+            }
+        };
+        
+        await db.collection("habits").insertOne(newHabit);
+
+        revalidatePath("/")
+        redirect("/")
     }
     return ( 
         <main className="container relative flex flex-col gap-8 px-12 pt-16">

@@ -1,5 +1,5 @@
 import React from "react";
-import DayState from '@/components/DayState'
+import DayState from '@/components/DayState/DayStateComponent'
 import Image from "@/node_modules/next/image";
 import Link from "next/link";
 
