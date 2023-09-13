@@ -8,15 +8,10 @@ export default async function Home() {
   const { db } = await connectToDatabase();
   const habits = await db.collection('habits').find({}).toArray();
 
-  // Extract the keys you want to display
   const keysToDisplay = habits.map(item => Object.keys(item).filter(key => key !== '_id')).flat()
 
-  // Remove duplicate keys
   const uniqueKeys = [...keysToDisplay];
 
-  // Now, uniqueKeys will contain the keys 'correr', 'estudar inglês', and 'hábito teste'
-
-  // To access the data inside these objects (even if empty), you can iterate through them
   uniqueKeys.forEach(key => {
     const item = habits.find(obj => obj[key]);
     if (item) {
@@ -42,7 +37,6 @@ export default async function Home() {
         habits.map(item => (
           Object.entries(item).map(([key, value]) => (
             Object.keys(value).length > 0 ? (
-              
                 key !== '_id' && (
                   <div key={key} className="text-white flex flex-col gap-2">
                     <div className="flex justify-between items-center">
