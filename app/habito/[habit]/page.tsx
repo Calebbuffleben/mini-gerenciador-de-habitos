@@ -1,6 +1,6 @@
 import React from "react";
 
-const Habit = () => {
+const Habit = ({ params: {habit} }: { params: { habit: string } }) => {
 
 }
 
