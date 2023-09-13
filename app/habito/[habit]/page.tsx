@@ -1,7 +1,9 @@
 import React from "react";
+import { connectToDatabase } from "../../../utils/mongodb"
 
-const Habit = ({ params: {habit} }: { params: { habit: string } }) => {
+const Habit = async ({ params: {habit} }: { params: { habit: string } }) => {
     const decodedHabit = decodeURIComponent(habit);
+    const { db } = await connectToDatabase();
 
     return (
         <h1>{decodedHabit}</h1>
