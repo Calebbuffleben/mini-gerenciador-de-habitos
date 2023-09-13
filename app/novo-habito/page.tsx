@@ -6,7 +6,6 @@ const NewHabit = () => {
     async function newHabit (formData: FormData) {
         "use server"
         const habit = formData.get("habit");
-
         const { db } = await connectToDatabase();
 
         const newHabit = {

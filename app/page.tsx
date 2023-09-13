@@ -2,25 +2,29 @@ import React from "react";
 import DayState from '@/components/DayState/DayStateComponent'
 import Image from "@/node_modules/next/image";
 import Link from "next/link";
+import { connectToDatabase } from "@/utils/mongodb";
 
-export default function Home() {
-  const habits = {
-    'correr': {
-      '2023-08-24': true,
-      '2023-08-25': false,
-      '2023-08-26': false,
-    },
-    'estudar programação': {
-      '2023-08-24': true,
-      '2023-08-25': false,
-      '2023-08-26': false,
-    },
-    'estudar inglês': {
-      '2023-08-24': true,
-      '2023-08-25': false,
-      '2023-08-26': false,
-    },
-  }
+export default async function Home() {
+  const { db } = await connectToDatabase();
+  const habits = await db.collection('habits').find({}).toArray();
+
+  // Extract the keys you want to display
+  const keysToDisplay = habits.map(item => Object.keys(item).filter(key => key !== '_id')).flat()
+
+  // Remove duplicate keys
+  const uniqueKeys = [...keysToDisplay];
+
+  // Now, uniqueKeys will contain the keys 'correr', 'estudar inglês', and 'hábito teste'
+
+  // To access the data inside these objects (even if empty), you can iterate through them
+  uniqueKeys.forEach(key => {
+    const item = habits.find(obj => obj[key]);
+    if (item) {
+      console.log(`Data for ${key}:`, item[key]);
+    } else {
+      console.log(`No data for ${key}`);
+    }
+  });
 
   const today = new Date();
   const todayWeekDay = today.getDay();
@@ -32,31 +36,38 @@ export default function Home() {
     <main className="container relative flex flex-col gap-8 px-4 pt-16">
       {habits === null || Object.keys(habits).length === 0 ? (
         <h1 className="mt-20 text-4xl font-light text-white font-display text-center">
-          Vocä não tem hábitos cadastrados
+          Você não tem hábitos cadastrados
         </h1>
       ) : (
-        habits !== null && Object.entries(habits).map(([habit, habitStreak]) => (
-          <div key={habit} className="text-white flex flex-col gap-2">
-            <div className="flex justify-between items-center">
-              <span className="text-xl font-light text-white font-sans">{habit}</span>
-              <button>
-                <Image 
-                 src="/images/trash.svg" 
-                 width={20} 
-                 height={20} 
-                 alt="Lixeira vermelha" 
-                />
-              </button>
-            </div>
-            <section className="grid grid-cols-7 bg-neutral-800 rounded-md p-2">
-              {sortedWeekDays.map(day => (
-                <div key={day} className="flex flex-col last:font-bold">
-                  <span className="font-sans text-xs text-white text-center" >{day}</span>
-                  <DayState day={undefined} />
-                </div>
-              ))}
-            </section>
-          </div>
+        habits.map(item => (
+          Object.entries(item).map(([key, value]) => (
+            Object.keys(value).length > 0 ? (
+              
+                key !== '_id' && (
+                  <div key={key} className="text-white flex flex-col gap-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-xl font-light text-white font-sans">{key}</span>
+                      <button>
+                        <Image 
+                          src="/images/trash.svg" 
+                          width={20} 
+                          height={20} 
+                          alt="Lixeira vermelha" 
+                        />
+                      </button>
+                    </div>
+                    <section className="grid grid-cols-7 bg-neutral-800 rounded-md p-2">
+                      {Object.entries(value).map(([date, boolValue]) => (
+                        <div key={date} className="flex flex-col last:font-bold">
+                          <span className="font-sans text-xs text-white text-center" >{date}</span>
+                          <DayState day={boolValue} />
+                        </div>
+                      ))}
+                    </section>
+                  </div>
+                )
+            ) : null // Return null when there's no data to display
+          ))
         ))
       )}
       <Link href="novo-habito" 
