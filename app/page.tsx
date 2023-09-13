@@ -66,11 +66,12 @@ export default async function Home() {
                     </section>
                   </div>
                 )
-            ) : null // Return null when there's no data to display
+            ) : null
           ))
         ))
       )}
-      <Link href="novo-habito" 
+      <Link 
+        href="novo-habito" 
         className="fixed text-center bottom-10 w-2/3 left-1/2 -translate-x-1/2 text-neutral-900 bg-[#45EDAD] font-display font-regular text-2xl p-2 rounded-md"
       >
         Novo hábito
