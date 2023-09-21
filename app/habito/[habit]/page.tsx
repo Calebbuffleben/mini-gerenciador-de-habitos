@@ -6,7 +6,7 @@ const Habit = async ({ params: {habit} }: { params: { habit: string } }) => {
     const { db } = await connectToDatabase();
 
     return (
-        <h1>{decodedHabit}</h1>
+        <h1>Habit {decodedHabit}</h1>
     )
 }
 
