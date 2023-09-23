@@ -12,7 +12,7 @@ const Habit = async ({ params: {habit} }: { params: { habit: string } }) => {
             <h1 className="text-2xl font-light text-center text-white font-display">
                 {decodedHabit}
             </h1>
-            <Link className="flex items-center font-sans text-xs text-white gap-2" href="/">
+            <Link className="flex items-center font-sans text-xs text-neutral-300 gap-2" href="/">
                 <ArrowIcon width={12} height={12} />
                 Voltar
             </Link>
