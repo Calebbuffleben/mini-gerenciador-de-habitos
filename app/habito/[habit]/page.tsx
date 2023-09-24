@@ -16,6 +16,20 @@ const Habit = async ({ params: {habit} }: { params: { habit: string } }) => {
                 <ArrowIcon width={12} height={12} />
                 Voltar
             </Link>
+            <section className="w-full my-2 rounded-md bg-neutral-800">
+                <div className="flex justify-between mx-2 my-4 font-sanz text-neutral-400">
+                    <button>
+                        <ArrowIcon className="stroke-neutral-400" width={12} height={12} />
+                    </button>
+                    <span>Julho 2023</span>
+                    <button>
+                        <ArrowIcon className="rotate-180 stroke-neutral-400" width={12} height={12} />
+                    </button>
+                </div>
+                <div className="grid w-full grid-cols-7 mt-2">
+
+                </div>
+            </section>
         </main>
     )
 }
