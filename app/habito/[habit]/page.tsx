@@ -27,7 +27,7 @@ const Habit = async ({ params: {habit} }: { params: { habit: string } }) => {
                     </button>
                 </div>
                 <div className="grid w-full grid-cols-7 mt-2">
-
+                    
                 </div>
             </section>
         </main>
