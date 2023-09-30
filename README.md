@@ -5,5 +5,3 @@
 - `Server Components`
 - `Data fetching`
 - `Server Actions`
-- `Nested layouts`
-- `Routes`
