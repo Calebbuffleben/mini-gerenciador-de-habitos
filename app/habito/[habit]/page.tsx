@@ -6,6 +6,7 @@ import { connectToDatabase } from "../../../utils/mongodb"
 const Habit = async ({ params: {habit} }: { params: { habit: string } }) => {
     const decodedHabit = decodeURI(habit);
     const { db } = await connectToDatabase();
+    const weekDays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
 
     return (
         <main className="container relative flex flex-col gap-8 px-12 pt-16">
@@ -27,7 +28,13 @@ const Habit = async ({ params: {habit} }: { params: { habit: string } }) => {
                     </button>
                 </div>
                 <div className="grid w-full grid-cols-7 mt-2">
-                    <div className="flex flex-col item-center p-2"></div>
+                    {weekDays.map(day => (
+                        <div key={day} className="flex flex-col item-center p-2">
+                            <span className='font-sant text-xs font-light text-neutral-200'>
+                                {day}
+                            </span>
+                        </div>
+                    ))}
                 </div>
             </section>
         </main>
