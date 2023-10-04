@@ -30,7 +30,7 @@ const Habit = async ({ params: {habit} }: { params: { habit: string } }) => {
                 <div className="grid w-full grid-cols-7 mt-2">
                     {weekDays.map(day => (
                         <div key={day} className="flex flex-col item-center p-2">
-                            <span className='font-sant text-xs font-light text-neutral-200'>
+                            <span className='font-sans text-xs font-light text-neutral-200'>
                                 {day}
                             </span>
                         </div>
