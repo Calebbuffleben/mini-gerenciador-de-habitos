@@ -3,6 +3,10 @@ import Link from "next/link";
 import React from "react";
 import { connectToDatabase } from "../../../utils/mongodb"
 
+function getDaysByMonth() {
+    
+}
+
 const Habit = async ({ params: {habit} }: { params: { habit: string } }) => {
     const decodedHabit = decodeURI(habit);
     const { db } = await connectToDatabase();
