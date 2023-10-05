@@ -3,8 +3,8 @@ import Link from "next/link";
 import React from "react";
 import { connectToDatabase } from "../../../utils/mongodb"
 
-function getDaysByMonth() {
-    
+function getDaysByMonth(month, year) {
+    var date = new Date(year, month, 1)
 }
 
 const Habit = async ({ params: {habit} }: { params: { habit: string } }) => {
