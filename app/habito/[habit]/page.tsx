@@ -5,6 +5,11 @@ import { connectToDatabase } from "../../../utils/mongodb"
 
 function getDaysByMonth(month, year) {
     var date = new Date(year, month, 1)
+    var days = [];
+
+    while(date.getMonth() === month){
+        days.push(new Date(date))
+    }
 }
 
 const Habit = async ({ params: {habit} }: { params: { habit: string } }) => {
