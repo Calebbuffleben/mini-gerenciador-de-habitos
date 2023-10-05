@@ -9,7 +9,10 @@ function getDaysByMonth(month, year) {
 
     while(date.getMonth() === month){
         days.push(new Date(date))
+        date.setDate(date.getDate() + 1)
     }
+
+    return days;
 }
 
 const Habit = async ({ params: {habit} }: { params: { habit: string } }) => {
