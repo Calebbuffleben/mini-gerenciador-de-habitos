@@ -3,9 +3,9 @@ import Link from "next/link";
 import React from "react";
 import { connectToDatabase } from "../../../utils/mongodb"
 
-function getDaysByMonth(month, year) {
-    var date = new Date(year, month, 1)
-    var days = [];
+function getDaysByMonth(month: number, year: number) {
+    const date = new Date(year, month, 1)
+    const days = [];
 
     while(date.getMonth() === month){
         days.push(new Date(date))
@@ -15,10 +15,18 @@ function getDaysByMonth(month, year) {
     return days;
 }
 
+const currentDate = new Date();
+const currentDay = currentDate.getDate();
+const currentMonth = currentDate.getMonth();
+const currentYear = currentDate.getFullYear();
+
 const Habit = async ({ params: {habit} }: { params: { habit: string } }) => {
     const decodedHabit = decodeURI(habit);
     const { db } = await connectToDatabase();
+
     const weekDays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
+
+    const daysInMonth = getDaysByMonth(currentMonth, currentYear);
 
     return (
         <main className="container relative flex flex-col gap-8 px-12 pt-16">
