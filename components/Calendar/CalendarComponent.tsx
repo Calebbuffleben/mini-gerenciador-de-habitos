@@ -19,7 +19,7 @@ function getDaysByMonth(month: number, year: number) {
   return days;
 }
 
-const CalendarComponent = ({ decodedHabit }) => {
+const CalendarComponent = ({ decodedHabit }: {decodedHabit: string}) => {
     const currentDate = new Date();
     const currentDay = currentDate.getDate();
     const currentMonth = currentDate.getMonth();
