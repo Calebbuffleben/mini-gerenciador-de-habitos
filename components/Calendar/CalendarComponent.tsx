@@ -1,12 +1,58 @@
-'use client'
+"use client"
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import ArrowIcon from "../ArrowIcon/ArrowIconComponent";
 
 const weekDays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
 
-const CalendarComponent = ({ decodedHabit, daysInMonth }) => (
-    <main className="container relative flex flex-col gap-8 px-12 pt-16">
+function getDaysByMonth(month: number, year: number) {
+    const date = new Date(year, month, 1);
+    const monthFirstWeekDay = date.getDay()
+    const fillLastMonthDays = Array(monthFirstWeekDay).fill(null)
+    const days = [...fillLastMonthDays];
+    while (date.getMonth() === month) {
+        days.push(new Date(date));
+        date.setDate(date.getDate() + 1)
+    }
+
+  return days;
+}
+
+const CalendarComponent = ({ decodedHabit }) => {
+    const currentDate = new Date();
+    const currentDay = currentDate.getDate();
+    const currentMonth = currentDate.getMonth();
+    const currentYear = currentDate.getFullYear();
+
+    const [month, setMonth] = useState(currentMonth);
+    const [year, setYear] = useState(currentYear);
+    const [daysInMonth, setDaysInMonth] = useState(getDaysByMonth(currentMonth, currentYear));
+
+    useEffect(() => {
+        setDaysInMonth(getDaysByMonth(month, year))
+    }, [month, year])
+
+    const goToPreviousMonth = () => {
+        if(month === 0){
+            setYear(year - 1)
+            setMonth(11)
+        } else {
+            setMonth(month - 1)
+        }
+    }
+
+    const goToNextMonth = () => {
+        if(month === 11){
+            setYear(year + 1)
+            setMonth(0)
+        } else {
+            setMonth(month + 1)
+        }
+    }
+
+    return(
+        <main className="container relative flex flex-col gap-8 px-12 pt-16">
             <h1 className="text-2xl font-light text-center text-white font-display">
                 {decodedHabit}
             </h1>
@@ -16,11 +62,11 @@ const CalendarComponent = ({ decodedHabit, daysInMonth }) => (
             </Link>
             <section className="w-full my-2 rounded-md bg-neutral-800">
                 <div className="flex justify-between mx-2 my-4 font-sanz text-neutral-400">
-                    <button>
+                    <button onClick={goToPreviousMonth}>
                         <ArrowIcon className="stroke-neutral-400" width={12} height={12} />
                     </button>
                     <span>Julho 2023</span>
-                    <button>
+                    <button onClick={goToNextMonth}>
                         <ArrowIcon className="rotate-180 stroke-neutral-400" width={12} height={12} />
                     </button>
                 </div>
@@ -42,6 +88,7 @@ const CalendarComponent = ({ decodedHabit, daysInMonth }) => (
                 </div>
             </section>
         </main>
-)
+    )
+}
 
 export default CalendarComponent
