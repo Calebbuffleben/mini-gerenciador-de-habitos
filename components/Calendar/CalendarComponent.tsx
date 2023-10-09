@@ -27,10 +27,12 @@ const CalendarComponent = ({ decodedHabit }) => {
 
     const [month, setMonth] = useState(currentMonth);
     const [year, setYear] = useState(currentYear);
+    const [selectedDate, setSelectedDate] = useState(new Date())
     const [daysInMonth, setDaysInMonth] = useState(getDaysByMonth(currentMonth, currentYear));
 
     useEffect(() => {
-        setDaysInMonth(getDaysByMonth(month, year))
+        setDaysInMonth(getDaysByMonth(month, year));
+        setSelectedDate(new Date(year, month, 1))
     }, [month, year])
 
     const goToPreviousMonth = () => {
@@ -51,6 +53,10 @@ const CalendarComponent = ({ decodedHabit }) => {
         }
     }
 
+    const getDateTitleString = () => {
+
+    }
+
     return(
         <main className="container relative flex flex-col gap-8 px-12 pt-16">
             <h1 className="text-2xl font-light text-center text-white font-display">
@@ -65,7 +71,7 @@ const CalendarComponent = ({ decodedHabit }) => {
                     <button onClick={goToPreviousMonth}>
                         <ArrowIcon className="stroke-neutral-400" width={12} height={12} />
                     </button>
-                    <span>Julho 2023</span>
+                    <span>{getDateTitleString()}</span>
                     <button onClick={goToNextMonth}>
                         <ArrowIcon className="rotate-180 stroke-neutral-400" width={12} height={12} />
                     </button>
