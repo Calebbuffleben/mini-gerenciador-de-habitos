@@ -55,6 +55,13 @@ const Habit = async ({ params: {habit} }: { params: { habit: string } }) => {
                             </span>
                         </div>
                     ))}
+                    {daysInMonth.map((day, index) => (
+                        <div key={index} className="flex flex-col items-center p-2">
+                            <span className="font-sans text-xs font-light text-neutral-400 text-center">
+                                {day.getDate()}
+                            </span>
+                        </div>
+                    ))}
                 </div>
             </section>
         </main>
