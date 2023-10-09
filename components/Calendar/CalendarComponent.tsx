@@ -54,7 +54,7 @@ const CalendarComponent = ({ decodedHabit }) => {
     }
 
     const getDateTitleString = () => {
-
+        return `${selectedDate.toLocaleString('pt-BR', {month: 'long'}).toUpperCase()} de ${selectedDate.getFullYear()}`
     }
 
     return(
