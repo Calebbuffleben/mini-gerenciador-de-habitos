@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import ArrowIcon from "../ArrowIcon/ArrowIconComponent";
+import DayState from "../DayState/DayStateComponent";
 
 const weekDays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
 
@@ -19,7 +20,7 @@ function getDaysByMonth(month: number, year: number) {
   return days;
 }
 
-const CalendarComponent = ({ decodedHabit }: {decodedHabit: string}) => {
+const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string, habitStreak: any }) => {
     const currentDate = new Date();
     const currentDay = currentDate.getDate();
     const currentMonth = currentDate.getMonth();
@@ -57,6 +58,10 @@ const CalendarComponent = ({ decodedHabit }: {decodedHabit: string}) => {
         return `${selectedDate.toLocaleString('pt-BR', {month: 'long'}).toUpperCase()} de ${selectedDate.getFullYear()}`
     }
 
+    const getDayString = (day: Date) => {
+        return `${year.toString()}-${(month + 1).toString().padStart(2, "0")}-${day.getDate().toString().padStart(2, "0")}`
+    }
+
     return(
         <main className="container relative flex flex-col gap-8 px-12 pt-16">
             <h1 className="text-2xl font-light text-center text-white font-display">
@@ -89,6 +94,7 @@ const CalendarComponent = ({ decodedHabit }: {decodedHabit: string}) => {
                             <span className="font-sans text-xs font-light text-neutral-400 text-center">
                                 {day?.getDate()}
                             </span>
+                            {day && <DayState day={habitStreak ? habitStreak[getDayString(day)] : undefined} />}
                         </div>
                     ))}
                 </div>
