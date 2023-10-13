@@ -1,5 +1,6 @@
 "use client"
 
+import { toggleHabit } from "@/app/actions";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import ArrowIcon from "../ArrowIcon/ArrowIconComponent";
@@ -90,7 +91,16 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
                         </div>
                     ))}
                     {daysInMonth.map((day, index) => (
-                        <div key={index} className="flex flex-col items-center p-2">
+                        <div 
+                            key={index} 
+                            className="flex flex-col items-center p-2"
+                            onClick={() => toggleHabit({
+                                decodedHabit,
+                                habitStreak,
+                                date: getDayString(day),
+                                done: habitStreak ? habitStreak[getDayString(day)] : true,
+                            })}
+                        >
                             <span className="font-sans text-xs font-light text-neutral-400 text-center">
                                 {day?.getDate()}
                             </span>
