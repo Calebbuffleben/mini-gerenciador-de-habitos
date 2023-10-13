@@ -41,14 +41,7 @@ export default async function Home() {
                   <div key={key} className="text-white flex flex-col gap-2">
                     <div className="flex justify-between items-center">
                       <span className="text-xl font-light text-white font-sans">{key}</span>
-                      <button>
-                        <Image 
-                          src="/images/trash.svg" 
-                          width={20} 
-                          height={20} 
-                          alt="Lixeira vermelha" 
-                        />
-                      </button>
+                      <DeleteButton />
                     </div>
                     <section className="grid grid-cols-7 bg-neutral-800 rounded-md p-2">
                       {Object.entries(value).map(([date, boolValue]) => (
