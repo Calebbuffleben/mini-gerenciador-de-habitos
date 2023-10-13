@@ -8,7 +8,7 @@ const DeleteButtonComponent = ({ habit }) => {
                 src="/images/trash.svg" 
                 width={20} 
                 height={20} 
-                alt="Lixeira vermelha" 
+                alt="Lixeira" 
             />
         </button>
     )
