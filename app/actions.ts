@@ -1,7 +1,6 @@
 "use server";
 
-//code not functional
-import { kv } from "@vercel/kv";
+import { connectToDatabase } from "@/utils/mongodb";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -13,7 +12,7 @@ type toogleHabit = {
 }
 
 export async function deleteHabit(habit: string) {
-  await kv.hdel("habits", habit);
+  const { db } = await connectToDatabase();
 
   revalidatePath("/")
 }
