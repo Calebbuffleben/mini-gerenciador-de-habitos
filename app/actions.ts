@@ -12,6 +12,7 @@ type toogleHabit = {
 }
 
 export async function deleteHabit(habit: string) {
+  const { db } = await connectToDatabase();
   const result = await db.collection('habits').deleteOne({ habit });
 
   revalidatePath("/")
@@ -31,6 +32,8 @@ export async function newHabit(formData: FormData) {
 }
 
 export async function toggleHabit({habit, habitStreak, date, done}: toogleHabit) {
+  const { db } = await connectToDatabase();
+  
   if (!habitStreak || !date) return
 
   const updatedHabitStreak = {
@@ -40,6 +43,10 @@ export async function toggleHabit({habit, habitStreak, date, done}: toogleHabit)
     }
   }
 
-  await kv.hset("habits", updatedHabitStreak)
+  const result = await db.collection('habits').updateOne(
+    { _id: habitName },
+    { $set: habitUpdate },
+    { upsert: true }
+  );
   revalidatePath("/")
 }
