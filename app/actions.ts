@@ -12,8 +12,7 @@ type toogleHabit = {
 }
 
 export async function deleteHabit(habit: string) {
-  const { db } = await connectToDatabase();
-  const result = await db.collection('habits').deleteOne({ _id: habitId });
+  const result = await db.collection('habits').deleteOne({ habit });
 
   revalidatePath("/")
 }
@@ -21,8 +20,11 @@ export async function deleteHabit(habit: string) {
 export async function newHabit(formData: FormData) {
   "use server";
 
+  const { db } = await connectToDatabase();
   const habit = formData.get("habit");
-  await kv.hset("habits", {[habit as string]: {}})
+  const result = await db.collection('habits').insertOne({
+    habit
+  });
 
   revalidatePath('/')
   redirect('/')
