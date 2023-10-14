@@ -13,6 +13,7 @@ type toogleHabit = {
 
 export async function deleteHabit(habit: string) {
   const { db } = await connectToDatabase();
+  const result = await db.collection('habits').deleteOne({ _id: habitId });
 
   revalidatePath("/")
 }
