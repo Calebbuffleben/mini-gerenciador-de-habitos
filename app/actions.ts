@@ -43,7 +43,7 @@ export async function toggleHabit({habit, habitStreak, date, done}: toogleHabit)
     }
   }
 
-  const result = await db.collection('habits').updateOne(
+  await db.collection('habits').updateOne(
     { _id: habitName },
     { $set: habitUpdate },
     { upsert: true }
