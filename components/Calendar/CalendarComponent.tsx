@@ -10,9 +10,10 @@ const weekDays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
 
 function getDaysByMonth(month: number, year: number) {
     const date = new Date(year, month, 1);
-    const monthFirstWeekDay = date.getDay()
-    const fillLastMonthDays = Array(monthFirstWeekDay).fill(null)
+    const monthFirstWeekDay = date.getDay();
+    const fillLastMonthDays = Array(monthFirstWeekDay).fill(null);
     const days = [...fillLastMonthDays];
+    
     while (date.getMonth() === month) {
         days.push(new Date(date));
         date.setDate(date.getDate() + 1)
