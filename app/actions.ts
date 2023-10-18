@@ -43,6 +43,8 @@ export async function toggleHabit({habit, habitStreak, date, done}: toogleHabit)
     }
   }
 
+  const habitUpdate = { [date]: completed };
+  
   await db.collection('habits').updateOne(
     { habit },
     { $set: habitUpdate },
