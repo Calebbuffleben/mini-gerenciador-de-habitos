@@ -1,10 +1,11 @@
 "use client"
-
-import { toggleHabit } from "@/app/actions";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import Link from "next/link";
+
 import ArrowIcon from "../ArrowIcon/ArrowIconComponent";
 import DayState from "../DayState/DayStateComponent";
+
+import { toggleHabit } from "@/app/actions";
 
 const weekDays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
 
@@ -13,7 +14,7 @@ function getDaysByMonth(month: number, year: number) {
     const monthFirstWeekDay = date.getDay();
     const fillLastMonthDays = Array(monthFirstWeekDay).fill(null);
     const days = [...fillLastMonthDays];
-    
+
     while (date.getMonth() === month) {
         days.push(new Date(date));
         date.setDate(date.getDate() + 1)
