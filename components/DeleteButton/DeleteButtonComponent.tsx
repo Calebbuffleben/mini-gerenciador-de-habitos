@@ -1,7 +1,7 @@
 "use client"
 
-import { deleteHabit } from "@/app/actions";
 import Image from "next/image";
+import { deleteHabit } from "@/app/actions";
 
 const DeleteButtonComponent = ({ habit }) => {
     return (
