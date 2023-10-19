@@ -1,5 +1,3 @@
-import ArrowIcon from "@/components/ArrowIcon/ArrowIconComponent";
-import Link from "next/link";
 import React from "react";
 import { connectToDatabase } from "../../../utils/mongodb";
 
