@@ -48,7 +48,7 @@ export default async function Home() {
                       {Object.entries(value).map(([date, boolValue]) => (
                         <div key={date} className="flex flex-col last:font-bold">
                           <span className="font-sans text-xs text-white text-center" >{date}</span>
-                          <DayState day={boolValue} />
+                          
                         </div>
                       ))}
                     </section>
