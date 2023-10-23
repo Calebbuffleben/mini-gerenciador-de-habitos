@@ -1,8 +1,6 @@
 import React from "react";
 import Link from "next/link";
-
 import { connectToDatabase } from "@/utils/mongodb";
-
 import DeleteButtonComponent from "@/components/DeleteButton/DeleteButtonComponent";
 import DayState from "@/components/DayState/DayStateComponent";
 
