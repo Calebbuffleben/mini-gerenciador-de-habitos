@@ -1,9 +1,10 @@
 import React from "react";
-import DayState from '@/components/DayState/DayStateComponent'
-import Image from "@/node_modules/next/image";
 import Link from "next/link";
+
 import { connectToDatabase } from "@/utils/mongodb";
+
 import DeleteButtonComponent from "@/components/DeleteButton/DeleteButtonComponent";
+import DayState from "@/components/DayState/DayStateComponent";
 
 export default async function Home() {
   const { db } = await connectToDatabase();
@@ -26,7 +27,13 @@ export default async function Home() {
   const todayWeekDay = today.getDay();
   const weekDays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
 
-  const sortedWeekDays = weekDays.slice(todayWeekDay + 1).concat(weekDays.slice(0, todayWeekDay + 1))
+  const sortedWeekDays = weekDays.slice(todayWeekDay + 1).concat(weekDays.slice(0, todayWeekDay + 1));
+  const lastSevenDays = weekDays.map((_, index) => {
+    const date = new Date();
+    date.setDate((date.getDate() - 1) - index)
+
+    return date.toISOString().slice(0, 10)
+  }).reverse()
 
   return (
     <main className="container relative flex flex-col gap-8 px-4 pt-16">
@@ -45,12 +52,14 @@ export default async function Home() {
                       <DeleteButtonComponent habit={key} />
                     </div>
                     <section className="grid grid-cols-7 bg-neutral-800 rounded-md p-2">
-                      {Object.entries(value).map(([date, boolValue]) => (
-                        <div key={date} className="flex flex-col last:font-bold">
-                          <span className="font-sans text-xs text-white text-center" >{date}</span>
-                          
-                        </div>
-                      ))}
+                    {sortedWeekDays.map((day, index) => (
+                      <div key={day} className="flex flex-col last:font-bold">
+                        <span  className="font-sans text-xs text-white text-center">
+                          {day}
+                        </span>
+                        <DayState day={value[lastSevenDays[index]]}/>
+                      </div>
+                    ))}
                     </section>
                   </div>
                 )
