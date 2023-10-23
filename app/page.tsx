@@ -44,7 +44,7 @@ export default async function Home() {
       ) : (
         habits.map(item => (
           Object.entries(item).map(([habit, habitStreak]) => (
-            Object.keys(habitStreak).length > 0 ? (
+            Object.keys(habitStreak).length > 0 && (
                 habit !== '_id' && (
                   <div key={habit} className="text-white flex flex-col gap-2">
                     <div className="flex justify-between items-center">
@@ -63,7 +63,7 @@ export default async function Home() {
                     </section>
                   </div>
                 )
-            ) : null
+            )
           ))
         ))
       )}
