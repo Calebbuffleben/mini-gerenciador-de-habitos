@@ -43,13 +43,13 @@ export default async function Home() {
         </h1>
       ) : (
         habits.map(item => (
-          Object.entries(item).map(([key, value]) => (
-            Object.keys(value).length > 0 ? (
-                key !== '_id' && (
-                  <div key={key} className="text-white flex flex-col gap-2">
+          Object.entries(item).map(([habit, habitStreak]) => (
+            Object.keys(habitStreak).length > 0 ? (
+                habit !== '_id' && (
+                  <div key={habit} className="text-white flex flex-col gap-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-xl font-light text-white font-sans">{key}</span>
-                      <DeleteButtonComponent habit={key} />
+                      <span className="text-xl font-light text-white font-sans">{habit}</span>
+                      <DeleteButtonComponent habit={habit} />
                     </div>
                     <section className="grid grid-cols-7 bg-neutral-800 rounded-md p-2">
                     {sortedWeekDays.map((day, index) => (
@@ -57,7 +57,7 @@ export default async function Home() {
                         <span  className="font-sans text-xs text-white text-center">
                           {day}
                         </span>
-                        <DayState day={value[lastSevenDays[index]]}/>
+                        <DayState day={habitStreak[lastSevenDays[index]]}/>
                       </div>
                     ))}
                     </section>
