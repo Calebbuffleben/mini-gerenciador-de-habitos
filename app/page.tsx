@@ -10,25 +10,12 @@ export default async function Home() {
   const { db } = await connectToDatabase();
   const habits = await db.collection('habits').find({}).toArray();
 
-  const keysToDisplay = habits.map(item => Object.keys(item).filter(key => key !== '_id')).flat()
-
-  const uniqueKeys = [...keysToDisplay];
-
-  uniqueKeys.forEach(key => {
-    const item = habits.find(obj => obj[key]);
-    if (item) {
-      console.log(`Data for ${key}:`, item[key]);
-    } else {
-      console.log(`No data for ${key}`);
-    }
-  });
-
   const today = new Date();
   const todayWeekDay = today.getDay();
   const weekDays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
 
-  const sortedWeekDays = weekDays.slice(todayWeekDay + 1).concat(weekDays.slice(0, todayWeekDay + 1));
-  const lastSevenDays = weekDays.map((_, index) => {
+  const sortedWeekDays = weekDays.slice(todayWeekDay).concat(weekDays.slice(0, todayWeekDay));
+  const lastSevenDays = weekDays.map((key, index) => {
     const date = new Date();
     date.setDate((date.getDate() - 1) - index)
 
@@ -43,7 +30,9 @@ export default async function Home() {
         </h1>
       ) : (
         habits.map(item => (
-          Object.entries(item).map(([habit, habitStreak]) => (
+          Object.entries(item).map(([habit, habitStreak]) => { 
+            console.log("Streak", habitStreak)
+            return (
             Object.keys(habitStreak).length > 0 && (
                 habit !== '_id' && (
                   <div key={habit} className="text-white flex flex-col gap-2">
@@ -53,18 +42,18 @@ export default async function Home() {
                     </div>
                     <section className="grid grid-cols-7 bg-neutral-800 rounded-md p-2">
                     {sortedWeekDays.map((day, index) => (
-                      <div key={day} className="flex flex-col last:font-bold">
+                      <div key={day} className="flex flex-col first:font-bold">
                         <span  className="font-sans text-xs text-white text-center">
                           {day}
                         </span>
-                        <DayState day={habitStreak[lastSevenDays[index]]}/>
+                        <DayState day={Object.values(habitStreak)[index]}/>
                       </div>
                     ))}
                     </section>
                   </div>
                 )
             )
-          ))
+          )})
         ))
       )}
       <Link 
