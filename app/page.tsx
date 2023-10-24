@@ -15,12 +15,6 @@ export default async function Home() {
   const weekDays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
 
   const sortedWeekDays = weekDays.slice(todayWeekDay).concat(weekDays.slice(0, todayWeekDay));
-  const lastSevenDays = weekDays.map((key, index) => {
-    const date = new Date();
-    date.setDate((date.getDate() - 1) - index)
-
-    return date.toISOString().slice(0, 10)
-  }).reverse()
 
   return (
     <main className="container relative flex flex-col gap-8 px-4 pt-16">
