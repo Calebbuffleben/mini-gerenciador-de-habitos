@@ -23,7 +23,7 @@ function getDaysByMonth(month: number, year: number) {
   return days;
 }
 
-const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string, habitStreak: any }) => {
+const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string, habitStreak: string }) => {
     const currentDate = new Date();
     const currentDay = currentDate.getDate();
     const currentMonth = currentDate.getMonth();

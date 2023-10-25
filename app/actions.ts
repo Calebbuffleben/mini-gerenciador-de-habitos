@@ -5,8 +5,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 type toogleHabit = {
-  habit: string;
-  habitStreak: Record<string, boolean> | null;
+  decodedHabit: string;
+  habitStreak: string;
   date: string | null;
   done?: boolean
 }
@@ -31,12 +31,12 @@ export async function newHabit(formData: FormData) {
   redirect('/')
 }
 
-export async function toggleHabit({habit, habitStreak, date, done}: toogleHabit) {
+export async function toggleHabit({ decodedHabit, habitStreak, date, done }: toogleHabit) {
   const { db } = await connectToDatabase();
   
   if (!habitStreak || !date) return
 
-  const updatedHabitStreak = {
+  /*const updatedHabitStreak = {
     [habit]: {
       ...habitStreak,
       [date]: done === undefined ? true : !done
@@ -50,5 +50,5 @@ export async function toggleHabit({habit, habitStreak, date, done}: toogleHabit)
     { $set: habitUpdate },
     { upsert: true }
   );
-  revalidatePath("/")
+  revalidatePath("/")*/
 }
