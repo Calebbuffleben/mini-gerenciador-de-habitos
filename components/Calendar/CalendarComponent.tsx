@@ -61,7 +61,7 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
         return `${selectedDate.toLocaleString('pt-BR', { month: 'long' }).toUpperCase()} de ${selectedDate.getFullYear()}`
     }
 
-    const getDay = (day) => {
+    const getDay = (day: string) => {
         const values = JSON.parse(habitStreak)
 
         for (const habit of values) {
