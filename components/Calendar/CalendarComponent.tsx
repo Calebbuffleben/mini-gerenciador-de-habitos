@@ -63,7 +63,6 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
 
     const getDay = (day) => {
         const values = JSON.parse(habitStreak)
-        const habitName = JSON.stringify(decodedHabit);
 
         for (const habit of values) {
             for (const habitName in habit) {
