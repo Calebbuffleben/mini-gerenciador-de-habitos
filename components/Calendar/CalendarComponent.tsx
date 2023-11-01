@@ -58,8 +58,28 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
     }
 
     const getDateTitleString = () => {
-        return `${selectedDate.toLocaleString('pt-BR', {month: 'long'}).toUpperCase()} de ${selectedDate.getFullYear()}`
+        return `${selectedDate.toLocaleString('pt-BR', { month: 'long' }).toUpperCase()} de ${selectedDate.getFullYear()}`
     }
+
+    const getDay = (day) => {
+        const values = JSON.parse(habitStreak)
+        const habitName = JSON.stringify(decodedHabit);
+
+        for (const habit of values) {
+            for (const habitName in habit) {
+                if (habitName !== "_id") {
+                    const entries = Object.entries(habit[habitName])
+                    for (const entry of entries) {
+                        console.log(entry[0])
+                        if(entry[0] === day) {
+                            console.log("Date", entry[1])
+                            return entry[1]
+                        }
+                    }
+                }
+            }
+        }
+    };
 
     const getDayString = (day: Date) => {
         return `${year.toString()}-${(month + 1).toString().padStart(2, "0")}-${day.getDate().toString().padStart(2, "0")}`
@@ -103,10 +123,14 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
                                 done: habitStreak ? habitStreak[getDayString(day)] : true,
                             })}
                         >
+                            {/*console.log("Day String " + getDayString(day) + "Habit Streak" + Object.entries(habitStreak))*/}
                             <span className="font-sans text-xs font-light text-neutral-400 text-center">
                                 {day?.getDate()}
                             </span>
-                            {day && <DayState day={habitStreak ? habitStreak[getDayString(day)] : undefined} />}
+                            {day && <DayState day={habitStreak ? getDay(getDayString(day)) : undefined} />}
+                            {
+                                getDay(day)
+                            }
                         </div>
                     ))}
                 </div>
@@ -115,4 +139,4 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
     )
 }
 
-export default CalendarComponent
+export default CalendarComponent;
