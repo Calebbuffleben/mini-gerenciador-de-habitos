@@ -127,9 +127,6 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
                                 {day?.getDate()}
                             </span>
                             {day && <DayState day={habitStreak ? getDay(getDayString(day)) : undefined} />}
-                            {
-                                getDay(day)
-                            }
                         </div>
                     ))}
                 </div>
