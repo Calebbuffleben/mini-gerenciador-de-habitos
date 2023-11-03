@@ -61,7 +61,7 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
         return `${selectedDate.toLocaleString('pt-BR', { month: 'long' }).toUpperCase()} de ${selectedDate.getFullYear()}`
     }
 
-    const getDay = (day: string) => {
+    const getDay = (day: string): string => {
         const values = JSON.parse(habitStreak)
 
         for (const habit of values) {
@@ -69,15 +69,16 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
                 if (habitName !== "_id") {
                     const entries = Object.entries(habit[habitName])
                     for (const entry of entries) {
-                        console.log(entry[0])
+                        
                         if(entry[0] === day) {
-                            console.log("Date", entry[1])
-                            return entry[1]
+                            return JSON.stringify(entry[1]);
                         }
+
                     }
                 }
             }
         }
+        return '';
     };
 
     const getDayString = (day: Date) => {
@@ -119,7 +120,7 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
                                 decodedHabit,
                                 habitStreak,
                                 date: getDayString(day),
-                                done: habitStreak ? habitStreak[getDayString(day)] : true,
+                                done: habitStreak ? getDay(getDayString(day)) : true,
                             })}
                         >
                             {/*console.log("Day String " + getDayString(day) + "Habit Streak" + Object.entries(habitStreak))*/}

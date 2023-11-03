@@ -8,7 +8,7 @@ type toogleHabit = {
   decodedHabit: string;
   habitStreak: string;
   date: string | null;
-  done?: boolean
+  done?: boolean | string;
 }
 
 export async function deleteHabit(habit: string) {
