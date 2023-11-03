@@ -123,7 +123,6 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
                                 done: habitStreak ? getDay(getDayString(day)) : true,
                             })}
                         >
-                            {/*console.log("Day String " + getDayString(day) + "Habit Streak" + Object.entries(habitStreak))*/}
                             <span className="font-sans text-xs font-light text-neutral-400 text-center">
                                 {day?.getDate()}
                             </span>
