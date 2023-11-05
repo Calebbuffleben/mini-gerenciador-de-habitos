@@ -61,7 +61,7 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
         return `${selectedDate.toLocaleString('pt-BR', { month: 'long' }).toUpperCase()} de ${selectedDate.getFullYear()}`
     }
 
-    const getDay = (day: string): string => {
+    const getDay = (day: string): boolean | undefined => {
         const values = JSON.parse(habitStreak)
 
         for (const habit of values) {
@@ -69,16 +69,14 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
                 if (habitName !== "_id") {
                     const entries = Object.entries(habit[habitName])
                     for (const entry of entries) {
-                        
                         if(entry[0] === day) {
-                            return JSON.stringify(entry[1]);
+                            return entry[1] as boolean;
                         }
-
                     }
                 }
             }
         }
-        return '';
+        return undefined;
     };
 
     const getDayString = (day: Date) => {
