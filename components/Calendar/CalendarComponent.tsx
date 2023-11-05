@@ -70,7 +70,7 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
                     const entries = Object.entries(habit[habitName])
                     for (const entry of entries) {
                         if(entry[0] === day) {
-                            return entry[1] as boolean;
+                            return entry[1] as boolean  ;
                         }
                     }
                 }
