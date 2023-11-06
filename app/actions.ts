@@ -36,7 +36,7 @@ export async function toggleHabit({ decodedHabit, habitStreak, date, done }: too
   
   if (!habitStreak || !date) return
 
-  /*const updatedHabitStreak = {
+  const updatedHabitStreak = {
     [habit]: {
       ...habitStreak,
       [date]: done === undefined ? true : !done
@@ -50,5 +50,5 @@ export async function toggleHabit({ decodedHabit, habitStreak, date, done }: too
     { $set: habitUpdate },
     { upsert: true }
   );
-  revalidatePath("/")*/
+  revalidatePath("/")
 }
