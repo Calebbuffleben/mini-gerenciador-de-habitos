@@ -8,8 +8,6 @@ const Habit = async ({ params: {habit} }: { params: { habit: string } }) => {
     const { db } = await connectToDatabase();
     const habits = await db.collection('habits').find({}).toArray();
 
-    console.log(decodedHabit)
-
     return (
         <CalendarComponent decodedHabit={decodedHabit} habitStreak={JSON.stringify(habits)} />
     )

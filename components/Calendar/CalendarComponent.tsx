@@ -25,7 +25,6 @@ function getDaysByMonth(month: number, year: number) {
 
 const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string, habitStreak: string }) => {
     const currentDate = new Date();
-    const currentDay = currentDate.getDate();
     const currentMonth = currentDate.getMonth();
     const currentYear = currentDate.getFullYear();
 
@@ -36,8 +35,23 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
 
     useEffect(() => {
         setDaysInMonth(getDaysByMonth(month, year));
-        setSelectedDate(new Date(year, month, 1))
-    }, [month, year])
+        setSelectedDate(new Date(year, month, 1));
+        formatHabit();  
+    }, [month, year]);
+
+    const formatHabit = () => {
+        const values = JSON.parse(habitStreak);
+        console.log("Before? ", values)
+
+        for(const habit of values) {
+            console.log("Values", habit)
+            for(const habitName in habit){
+                if(habitName === decodedHabit){
+                    console.log("Habit Name", Object.entries(habit[habitName]    ))
+                }
+            }
+        }
+    }
 
     const goToPreviousMonth = () => {
         if(month === 0){
@@ -67,10 +81,12 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
         for (const habit of values) {
             for (const habitName in habit) {
                 if (habitName !== "_id") {
-                    const entries = Object.entries(habit[habitName])
-                    for (const entry of entries) {
-                        if(entry[0] === day) {
-                            return entry[1] as boolean;
+                    if(habitName === decodedHabit){
+                        const entries = Object.entries(habit[habitName])
+                        for (const entry of entries) {
+                            if(entry[0] === day) {
+                                return entry[1] as boolean;
+                            }
                         }
                     }
                 }

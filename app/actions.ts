@@ -33,11 +33,13 @@ export async function newHabit(formData: FormData) {
 
 export async function toggleHabit({ decodedHabit, habitStreak, date, done }: toogleHabit) {
   const { db } = await connectToDatabase();
-  
+  const habit = JSON.parse(habitStreak);
+  //console.log("Habit: " + JSON.stringify(habit[0][decodedHabit]) +" Decode Habit:        " + decodedHabit + "Habit Streak:       " + habitStreak + "Date:         " + date + "Done:         " + done)
+
   if (!habitStreak || !date) return
 
-  const updatedHabitStreak = {
-    [habit]: {
+  /*const updatedHabitStreak = {
+    [decodedHabit]: {
       ...habitStreak,
       [date]: done === undefined ? true : !done
     }
@@ -50,5 +52,5 @@ export async function toggleHabit({ decodedHabit, habitStreak, date, done }: too
     { $set: habitUpdate },
     { upsert: true }
   );
-  revalidatePath("/")
+  revalidatePath("/") */
 }
