@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 
 import ArrowIcon from "../ArrowIcon/ArrowIconComponent";
@@ -36,10 +36,9 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
     useEffect(() => {
         setDaysInMonth(getDaysByMonth(month, year));
         setSelectedDate(new Date(year, month, 1));
-        formatHabit();  
     }, [month, year]);
 
-    const formatHabit = () => {
+    const formatHabit = useCallback( () => {
         const values = JSON.parse(habitStreak);
         console.log("Before? ", values)
 
@@ -47,11 +46,12 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
             console.log("Values", habit)
             for(const habitName in habit){
                 if(habitName === decodedHabit){
-                    console.log("Habit Name", Object.entries(habit[habitName]    ))
+                    return Object.entries(habit[habitName]);
                 }
             }
         }
-    }
+        return {}
+    }, [decodedHabit, habitStreak]);
 
     const goToPreviousMonth = () => {
         if(month === 0){
@@ -132,7 +132,7 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
                             className="flex flex-col items-center p-2"
                             onClick={() => toggleHabit({
                                 decodedHabit,
-                                habitStreak,
+                                habitStreak: formatHabit(),
                                 date: getDayString(day),
                                 done: habitStreak ? getDay(getDayString(day)) : true,
                             })}
