@@ -40,17 +40,15 @@ const CalendarComponent = ({ decodedHabit, habitStreak }: { decodedHabit: string
 
     const formatHabit = useCallback( () => {
         const values = JSON.parse(habitStreak);
-        console.log("Before? ", values)
 
         for(const habit of values) {
-            console.log("Values", habit)
             for(const habitName in habit){
                 if(habitName === decodedHabit){
-                    return Object.entries(habit[habitName]);
+                    return JSON.stringify(habit);
                 }
             }
         }
-        return {}
+        return ''
     }, [decodedHabit, habitStreak]);
 
     const goToPreviousMonth = () => {

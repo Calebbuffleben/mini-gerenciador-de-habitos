@@ -34,9 +34,9 @@ export async function newHabit(formData: FormData) {
 export async function toggleHabit({ decodedHabit, habitStreak, date, done }: toogleHabit) {
   const { db } = await connectToDatabase();
   const habit = JSON.parse(habitStreak);
-  //console.log("Habit: " + JSON.stringify(habit[0][decodedHabit]) +" Decode Habit:        " + decodedHabit + "Habit Streak:       " + habitStreak + "Date:         " + date + "Done:         " + done)
+  console.log("Habit actions page: " + JSON.stringify(habit))
 
-  if (!habitStreak || !date) return
+  if(!habitStreak || !date) return
 
   /*const updatedHabitStreak = {
     [decodedHabit]: {
