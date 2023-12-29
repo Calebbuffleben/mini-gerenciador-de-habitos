@@ -1,6 +1,6 @@
 class HabitService {
     async createHabit() {
-        
+        const habit = new this.habitModel();
     }
 }
 
