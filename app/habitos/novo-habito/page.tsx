@@ -1,6 +1,6 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { connectToDatabase } from "../../utils/mongodb"
+import { connectToDatabase } from "../../../utils/mongodb"
 
 const NewHabit = () => {
     async function newHabit (formData: FormData) {

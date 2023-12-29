@@ -1,7 +1,7 @@
 import React from "react";
-import { connectToDatabase } from "../../../utils/mongodb";
+import { connectToDatabase } from "../../../../utils/mongodb";
 
-import CalendarComponent from "../../../components/Calendar/CalendarComponent";
+import CalendarComponent from "../../../../components/Calendar/CalendarComponent";
 
 const Habit = async ({ params: {habit} }: { params: { habit: string } }) => {
     const decodedHabit = decodeURI(habit);
