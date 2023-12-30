@@ -1,20 +1,22 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { connectToDatabase } from "../../../utils/mongodb"
+import { connectToDatabase } from "../../../utils/mongodb";
+import HabitControler from "../controllers/HabitController";
 
 const NewHabit = () => {
     async function newHabit (formData: FormData) {
         "use server"
+        
+        const habitController = new HabitControler();
+
         const habit = formData.get("habit");
-        const { db } = await connectToDatabase();
 
         const newHabit = {
             [habit as string] : {
 
             }
         };
-    
-        await db.collection("habits").insertOne(newHabit);
+        await habitController.addHabit(newHabit);
 
         revalidatePath("/");
         redirect("/"); 

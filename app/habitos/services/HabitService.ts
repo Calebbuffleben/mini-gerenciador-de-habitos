@@ -1,6 +1,9 @@
+import { HabitModel } from "../models/HabitModel";
+
 class HabitService {
-    async createHabit() {
-        const habit = new this.habitModel();
+    async createHabit(habit) {
+        const habitModel = new HabitModel(habit);
+        const response = await habitModel;
     }
 }
 
