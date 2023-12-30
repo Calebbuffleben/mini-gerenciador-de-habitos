@@ -4,6 +4,8 @@ class HabitService {
     async createHabit(habit) {
         const habitModel = new HabitModel(habit);
         const response = await habitModel;
+
+        return response;
     }
 }
 
