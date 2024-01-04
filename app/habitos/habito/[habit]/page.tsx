@@ -2,11 +2,12 @@ import React from "react";
 import { connectToDatabase } from "../../../../utils/mongodb";
 
 import CalendarComponent from "../../../../components/Calendar/CalendarComponent";
+import HabitController from "../../controllers/HabitController";
 
 const Habit = async ({ params: {habit} }: { params: { habit: string } }) => {
     const decodedHabit = decodeURI(habit);
-    const { db } = await connectToDatabase();
-    const habits = await db.collection('habits').find({}).toArray();
+
+    const habits = new HabitController().getHabits();
 
     return (
         <CalendarComponent decodedHabit={decodedHabit} habitStreak={JSON.stringify(habits)} />
