@@ -1,5 +1,4 @@
 import React from "react";
-import { connectToDatabase } from "../../../../utils/mongodb";
 
 import CalendarComponent from "../../../../components/Calendar/CalendarComponent";
 import HabitController from "../../controllers/HabitController";
