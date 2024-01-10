@@ -1,7 +1,6 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { connectToDatabase } from "../../../utils/mongodb";
-import HabitControler from "../controllers/HabitController";
+import HabitControler from "../../controllers/HabitController";
 
 const NewHabit = () => {
     async function newHabit (formData: FormData) {
